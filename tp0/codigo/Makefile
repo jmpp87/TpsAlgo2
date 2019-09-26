@@ -1,4 +1,4 @@
-CC = g++
+CC = g++   #g++ o clang++
 CXXARGS  = -g -Wall
 CXXFLAGS = -I. $(CXXARGS)
 LDFLAGS  = -g 

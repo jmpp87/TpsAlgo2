@@ -40,6 +40,7 @@ istream & operator>>(istream &is, ComplexSignal &v)
 ostream & operator<<(ostream &os, const ComplexSignal &v)
 {
 	os<<*(v.arr);
+	os<<endl;
 	return os;
 }
 

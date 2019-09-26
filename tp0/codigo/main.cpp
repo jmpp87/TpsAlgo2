@@ -68,16 +68,16 @@ opt_method(string const &arg)
     if (arg == "-") {
         metodo = 0; ///mediana por default
     }else{
-        if (arg == "DFT"){
+        if (arg == "dft"){
             metodo = 0;
             flag = 0;
         }
-        if (arg == "IDFT"){
+        if (arg == "idft"){
             metodo = 1;
             flag = 0;
         }
         if (flag) {
-            cerr << "cannot open "
+            cerr << "Unknown method "
             << arg
             << "."
             << endl;
@@ -129,7 +129,7 @@ opt_output(string const &arg)
 static void
 opt_help(string const &arg)
 {
-    cout << "tp0 [-m IDFT / DFT] [-i file] [-o file]"
+    cout << "tp0 [-m idft / dft] [-i file] [-o file]"
     << endl;
     exit(0);
 }
