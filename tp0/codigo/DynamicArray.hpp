@@ -21,7 +21,6 @@ class DynamicArray{
 	private:
 		size_t allocMemorySize_;
 		size_t length_;
-		size_t loadedValuesSize_;
 		T *array_;
 
 		// Método privado que redimensiona el tamaño del arreglo
@@ -55,8 +54,6 @@ class DynamicArray{
 			// Método para obtener longitud del arreglo
 			size_t getLength()const;
 
-			// Método para obtener la cantidad de elementos cargados en el arreglo 
-			size_t getLoadedValuesSize()const;
 		
 			// Método para obtener sin modificar el valor del i-esimo elemento del arreglo
 			T const &operator[](size_t)const;

@@ -379,13 +379,17 @@ operator>>(istream &is, Complex &c)
            good = true;
         else good = false;
     }
-    else{ 
-        is.putback(ch);
-        if(is >> re){
-            im = 0;
-            good = true;
-        }
-        else good = false;
+    else{
+		if(!is.eof()){
+			 
+			is.putback(ch);
+			if(is >> re){
+				im = 0;
+				good = true;
+			}
+			else good = false;
+		}
+		else return is;	
     }
 
     if( good ) {

@@ -24,12 +24,11 @@ DynamicArray< T >::resize()
 	T* newArray;
 
 
-	if( length_ == 0 ){
+	if( length_ == 0 && allocMemorySize_ == 0 ){
 		if( !( array_ = new T[INIT_CHOP_SIZE]) )
 			return	false;	
 		
 		allocMemorySize_=INIT_CHOP_SIZE;
-		length_ = allocMemorySize_;
 		
 	}
 	else{
@@ -52,11 +51,11 @@ DynamicArray< T >::resize()
 
 // Constructor por default
 template < class T >
-DynamicArray< T >::DynamicArray():allocMemorySize_(0),length_(0), loadedValuesSize_(0), array_(0){} 
+DynamicArray< T >::DynamicArray():allocMemorySize_(0),length_(0), array_(0){} 
 
 // Constructor por parámetro
 template <class T>
-DynamicArray<T>::DynamicArray(size_t len):allocMemorySize_(len), length_(len), loadedValuesSize_(0)
+DynamicArray<T>::DynamicArray(size_t len):allocMemorySize_(len), length_(len)
 {
 
 
@@ -80,7 +79,6 @@ DynamicArray< T >::DynamicArray(const DynamicArray< T > &orig)
 	if( !orig.empty() ){
 		allocMemorySize_=orig.allocMemorySize_;
 		
-		loadedValuesSize_ = orig.loadedValuesSize_;
 
 		length_ = orig.length_;
 		 
@@ -110,14 +108,6 @@ size_t
 DynamicArray< T >::getLength()const
 {
 	return length_;
-}
-
-// Método para obtener la cantidad de elementos cargados en el arreglo
-template < class T >
-size_t
-DynamicArray< T >::getLoadedValuesSize()const
-{
-	return loadedValuesSize_;
 }
 
 
@@ -197,7 +187,7 @@ DynamicArray< T >::operator=(const DynamicArray< T > &orig)
 				delete []array_;	
 				array_ = aux;
 				length_ = orig.length_;
-				loadedValuesSize_=orig.loadedValuesSize_;
+				
 			}
 			
 			
@@ -240,26 +230,40 @@ operator>>(istream &is , DynamicArray< T > & array)
 {
 	T c;
 	size_t i = 0;
+	char ch='l';
+	
+	// Seteo que la longitud inicial de array es 0
+	// cada vez que utilizo el operador >>
+	// para meter un tira de datos de tipo T
+	array.length_ = 0;
+	//Como solo espacios y lineas nuevas
+	while( is.get(ch) && ch != '\n' && ch == ' '); 
+	if( ch != '\n' || !is.eof() )
+	{	
+		is.putback(ch);
+		while( (is >> c) && !is.eof() )
+		{
+			
+			if( array.length_ == array.allocMemorySize_ ){ 
 
-		
-	while( (is >> c) && !is.eof() )
-	{
-		
-		if( array.length_ == array.allocMemorySize_ ){
+				if( array.resize() == false ){
+					std::cerr << "There is not enough memory" << std::endl;
+					exit(1);
+				}
+			} 
+			
+			
+			array.array_[i++] = c;
+			array.length_++;
 
-			if( array.resize() == false ){
-				std::cerr << "There is not enough memory" << std::endl;
-				exit(1);
-			}
-		} 
-		if(array.length_ == array.loadedValuesSize_) array.length_++;
-		
-		array.array_[i++] = c;
-		
-		
-		array.loadedValuesSize_++;
-		
+			while( is.get(ch) && ch != '\n' && ch == ' ');
+			if(is.eof()) break;
+			if(ch == '\n') break;
+			else is.putback(ch);
+		}
+
 	}
+
 	return is;
 }
 

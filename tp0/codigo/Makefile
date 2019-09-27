@@ -26,4 +26,4 @@ complex.o: complex.cpp complex.hpp
 	
 	
 clean:
-	$(RM) -vf *.o *.exe *.t *.out *.err
+	$(RM) -vf *.o *.exe *.t *.out *.err 

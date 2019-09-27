@@ -45,7 +45,7 @@ main(int argc, char * const argv[])
     ComplexSignal *tcsignal;
     cmdline cmdl(options);
     cmdl.parse(argc, argv);
-       
+    
     *iss >> csignal;
     
     if(metodo == 0)
