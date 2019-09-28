@@ -46,16 +46,33 @@ main(int argc, char * const argv[])
     cmdline cmdl(options);
     cmdl.parse(argc, argv);
     
-    *iss >> csignal;
+    //char ch;
     
-    if(metodo == 0)
-		tcsignal = csignal.computeDFT();
-	else	
-		tcsignal = csignal.computeIDFT();
+    //cin.get(ch);
+    //if(cin.eof()) cout << "Si es EOF\n";
+    //else cout << "no es EOF\n";
+    
+    //cin.get(ch);
+    //if(cin.eof()) cout << "Si es EOF\n";
+    //else cout << "no es EOF\n";
+    
+    while(1){
+		if( !(*iss >> csignal) ){			
+			if( !( iss->eof() ) )
+					cerr << "Corrupt input" << endl;
+			break;		
+		}
 		
-	*oss << *tcsignal;
+		if(metodo == 0)
+			tcsignal = csignal.computeDFT();
+		else	
+			tcsignal = csignal.computeIDFT();
+			
+		*oss << *tcsignal;
+		delete tcsignal;
+	}
 	
-	delete tcsignal;    
+	    
     
 }
 

@@ -380,16 +380,13 @@ operator>>(istream &is, Complex &c)
         else good = false;
     }
     else{
-		if(!is.eof()){
-			 
-			is.putback(ch);
-			if(is >> re){
-				im = 0;
-				good = true;
-			}
-			else good = false;
+
+		is.putback(ch);
+		if(is >> re){
+			im = 0;
+			good = true;
 		}
-		else return is;	
+		else good = false;
     }
 
     if( good ) {
@@ -399,5 +396,5 @@ operator>>(istream &is, Complex &c)
     else is.clear( ios::failbit );
 
 
-    return    is;
+    return is;
 }

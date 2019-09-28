@@ -230,15 +230,15 @@ operator>>(istream &is , DynamicArray< T > & array)
 {
 	T c;
 	size_t i = 0;
-	char ch='l';
+	char ch;
 	
 	// Seteo que la longitud inicial de array es 0
 	// cada vez que utilizo el operador >>
 	// para meter un tira de datos de tipo T
 	array.length_ = 0;
 	//Como solo espacios y lineas nuevas
-	while( is.get(ch) && ch != '\n' && ch == ' '); 
-	if( ch != '\n' || !is.eof() )
+	while( is.get(ch) && ch != '\n' && ch == ' ');
+	if(  !is.eof()  && ch != '\n' )
 	{	
 		is.putback(ch);
 		while( (is >> c) && !is.eof() )
@@ -263,7 +263,6 @@ operator>>(istream &is , DynamicArray< T > & array)
 		}
 
 	}
-
 	return is;
 }
 
