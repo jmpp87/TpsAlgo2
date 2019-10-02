@@ -46,16 +46,6 @@ main(int argc, char * const argv[])
     cmdline cmdl(options);
     cmdl.parse(argc, argv);
     
-    //char ch;
-    
-    //cin.get(ch);
-    //if(cin.eof()) cout << "Si es EOF\n";
-    //else cout << "no es EOF\n";
-    
-    //cin.get(ch);
-    //if(cin.eof()) cout << "Si es EOF\n";
-    //else cout << "no es EOF\n";
-    
     while(1){
 		if( !(*iss >> csignal) ){			
 			if( !( iss->eof() ) )
