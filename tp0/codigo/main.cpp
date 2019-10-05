@@ -50,6 +50,7 @@ main(int argc, char * const argv[])
 		if( !(*iss >> csignal) ){			
 			if( !( iss->eof() ) )
 					cerr << "Corrupt input" << endl;
+					return EXIT_FAILURE;
 			break;		
 		}
 		
@@ -63,7 +64,7 @@ main(int argc, char * const argv[])
 	}
 	
 	    
-    
+    return EXIT_SUCCESS;
 }
 
 
