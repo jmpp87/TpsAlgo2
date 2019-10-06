@@ -38,6 +38,23 @@ static fstream ofs;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 int
 main(int argc, char * const argv[])
 {
