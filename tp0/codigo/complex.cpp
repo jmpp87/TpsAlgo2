@@ -346,7 +346,7 @@ operator!=(double r, const Complex &c1)
 ostream &
 operator<<(ostream &os, const Complex &c)
 {
-	os<<fixed;
+	//os<<fixed;
 	
 	os << COMPLEX_BRACKETS_BEGIN_CHAR 
 	   << c.re_
