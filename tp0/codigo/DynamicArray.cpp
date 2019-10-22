@@ -218,7 +218,7 @@ ostream &
 operator<<(ostream &os, const DynamicArray< T > &arr)
 {
 	for(size_t i = 0; i < arr.length_; i++)
-	 os<<arr[i];	
+	 os<<arr[i]<<" ";	
 	return os;
 }
 
@@ -237,7 +237,7 @@ operator>>(istream &is , DynamicArray< T > & array)
 	// para meter un tira de datos de tipo T
 	array.length_ = 0;
 	//Como solo espacios y lineas nuevas
-	while( is.get(ch) && ch != '\n' && ch == ' ');
+	while( is.get(ch) && ch != '\n' && ( ch == ' ' || ch == '\t' ) );
 	if(  !is.eof()  && ch != '\n' )
 	{	
 		is.putback(ch);
@@ -252,11 +252,10 @@ operator>>(istream &is , DynamicArray< T > & array)
 				}
 			} 
 			
-			
 			array.array_[i++] = c;
 			array.length_++;
 
-			while( is.get(ch) && ch != '\n' && ch == ' ');
+			while( is.get(ch) && ch != '\n' && ( ch == ' ' || ch == '\t' ) );
 			if(is.eof()) break;
 			if(ch == '\n') break;
 			else is.putback(ch);

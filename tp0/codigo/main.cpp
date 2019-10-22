@@ -14,6 +14,11 @@
 
 #define tipo_dato_ double 
 
+enum method_t{
+		DFT_METHOD = 0,
+		IDFT_METHOD = 1
+};
+
 using namespace std;
 
 static void opt_input(string const &);
@@ -30,7 +35,7 @@ static option_t options[] = {
     {0, },
 };
 
-static size_t metodo =0 ;
+static method_t metodo = DFT_METHOD ;
 static istream *iss = 0;
 static ostream *oss = 0;
 static fstream ifs;
@@ -64,18 +69,19 @@ main(int argc, char * const argv[])
     cmdl.parse(argc, argv);
     
     while(1){
+		
 		if( !(*iss >> csignal) ){			
-			if( !( iss->eof() ) )
-					cerr << "Corrupt input" << endl;
-					return EXIT_FAILURE;
+			if( !( iss->eof() ) ){
+				cerr << "Corrupt input" << endl;
+				return EXIT_FAILURE;
+			}
 			break;		
 		}
 		
-		if(metodo == 0)
+		if(metodo == DFT_METHOD)
 			tcsignal = csignal.computeDFT();
-		else	
-			tcsignal = csignal.computeIDFT();
-			
+		else if(metodo == IDFT_METHOD)	
+			tcsignal = csignal.computeIDFT();	
 		*oss << *tcsignal;
 		delete tcsignal;
 	}
@@ -91,14 +97,14 @@ opt_method(string const &arg)
 {
     size_t flag = 1;
     if (arg == "-") {
-        metodo = 0; ///mediana por default
+        metodo = DFT_METHOD; ///mediana por default
     }else{
         if (arg == "dft"){
-            metodo = 0;
+            metodo = DFT_METHOD;
             flag = 0;
         }
         if (arg == "idft"){
-            metodo = 1;
+            metodo = IDFT_METHOD;
             flag = 0;
         }
         if (flag) {
