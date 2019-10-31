@@ -4,21 +4,20 @@
 #include <stdlib.h>
 #include <iomanip>
 #include <cmath>
-#include "DynamicArray.hpp"
-#include "complex.hpp"
-#include "ComplexSignal.hpp"
+#include "DynamicArray.h"
+#include "complex.h"
+#include "ComplexSignal.h"
 
 using namespace std;
 
 #define NUMBER_PI  3.141592654
+
 
 static Complex
 Wn(size_t N, int k, size_t n);
 
 static Complex 
 Sumatory(const DynamicArray <Complex> &arr, int k);
-
-
 
 
 ComplexSignal::ComplexSignal()
@@ -62,10 +61,9 @@ ComplexSignal* ComplexSignal::computeIDFT()
 	DynamicArray <Complex> *arrAux = new DynamicArray<Complex>(arr->getLength());
 	size_t N = arr->getLength();
 
-	for (size_t k=0; k<N; k++){
-				
-	   (*arrAux)[k] = Sumatory(*arr, -k)/N;
-    }	
+	for (size_t k=0; k<N; k++)
+		(*arrAux)[k] = Sumatory(*arr, -k)/N;
+    
 	
 	return new ComplexSignal( arrAux );
 }
@@ -78,15 +76,13 @@ ComplexSignal::~ComplexSignal()
 
 static Complex 
 Sumatory(const DynamicArray <Complex> &arr, int k)
-{
-	
+{	
 	Complex sum;
 	size_t N = arr.getLength();
-	for (size_t n=0; n<N; n++){
 	
+	for (size_t n=0; n<N; n++)	
 		sum = sum + arr[n] * Wn(N, k, n);
-	} 
-	
+		
 	return sum;
 }
 
@@ -99,10 +95,6 @@ Wn(size_t N, int k, size_t n)
 	double im = sin(aux);
 	im = -1*im;
 	Complex wn(re,im);
-	return  wn;
 	
+	return  wn;	
 }
-
-
-
-

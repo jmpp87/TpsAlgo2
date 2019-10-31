@@ -1,10 +1,10 @@
 #include <iostream>
 #include <cmath>
 
-#include "complex.hpp"
+#include "complex.h"
 
 
-// Constructor por default
+// Constructor por defecto
 Complex::Complex(): re_(0), im_(0)
 {
 }
@@ -366,8 +366,8 @@ operator>>(istream &is, Complex &c)
     double    im = 0;
     char    ch;
 
-
-    if ( is >> ch && ch == COMPLEX_BRACKETS_BEGIN_CHAR ) {
+    if ( is >> ch && ch == COMPLEX_BRACKETS_BEGIN_CHAR ) 
+    {
         if ( 
              is >> re &&
              is >> ch &&
@@ -377,24 +377,28 @@ operator>>(istream &is, Complex &c)
              ch == COMPLEX_BRACKETS_END_CHAR
            )
            good = true;
-        else good = false;
+        else 
+        	  good = false;
     }
-    else{
-
+    else
+    {
 		is.putback(ch);
-		if(is >> re){
+		if(is >> re)
+		{
 			im = 0;
 			good = true;
 		}
-		else good = false;
+		else 
+			good = false;
     }
 
-    if( good ) {
+    if( good ) 
+    {
        c.re_ = re; 
        c.im_ = im; 
     }
-    else is.clear( ios::failbit );
-
+    else 
+    	is.clear( ios::failbit );
 
     return is;
 }

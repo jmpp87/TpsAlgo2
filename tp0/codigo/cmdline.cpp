@@ -34,12 +34,14 @@ cmdline::parse(int argc, char * const argv[])
     // si se trata de una opción corta, o larga. Luego,
     // llamamos a la función de parseo correspondiente.
     //
-    for (int i = 1; i < argc; ++i) {
+    for (int i = 1; i < argc; ++i) 
+    {
         // Todos los parámetros de este programa deben
         // pasarse en forma de opciones. Encontrar un
         // parámetro no-opción es un error.
         //
-        if (argv[i][0] != '-') {
+        if (argv[i][0] != '-') 
+        {
             cerr << "Invalid non-option argument: "
             << argv[i]
             << endl;
@@ -51,8 +53,7 @@ cmdline::parse(int argc, char * const argv[])
         // estar a continuación no son interpretados
         // como opciones.
         //
-        if (argv[i][1] == '-'
-            && argv[i][2] == 0)
+        if (argv[i][1] == '-' && argv[i][2] == 0)
             break;
         
         // Finalmente, vemos si se trata o no de una
@@ -69,12 +70,14 @@ cmdline::parse(int argc, char * const argv[])
     // (1) no hayan figurado explícitamente en la línea
     // de comandos, y (2) tengan valor por defecto.
     //
-    for (option_t *op = option_table; !END_OF_OPTIONS(op); ++op) {
+    for (option_t *op = option_table; !END_OF_OPTIONS(op); ++op) 
+    {
 #define OPTION_NAME(op) \
         (op->short_name ? op->short_name : op->long_name)
         if (op->flags & OPT_SEEN)
             continue;
-        if (op->flags & OPT_MANDATORY) {
+        if (op->flags & OPT_MANDATORY) 
+        {
             cerr << "Option "
             << "-"
             << OPTION_NAME(op)
@@ -96,8 +99,10 @@ cmdline::do_long_opt(const char *opt, const char *arg)
     // línea de comandos. De no encontrarse, indicamos el
     // error.
     //
-    for (option_t *op = option_table; op->long_name != 0; ++op) {
-        if (string(opt) == string(op->long_name)) {
+    for (option_t *op = option_table; op->long_name != 0; ++op) 
+    {
+        if (string(opt) == string(op->long_name)) 
+        {
             // Marcamos esta opción como usada en
             // forma explícita, para evitar tener
             // que inicializarla con el valor por
@@ -105,12 +110,14 @@ cmdline::do_long_opt(const char *opt, const char *arg)
             //
             op->flags |= OPT_SEEN;
             
-            if (op->has_arg) {
+            if (op->has_arg) 
+            {
                 // Como se trada de una opción
                 // con argumento, verificamos que
                 // el mismo haya sido provisto.
                 //
-                if (arg == 0) {
+                if (arg == 0) 
+                {
                     cerr << "Option requires argument: "
                     << "--"
                     << opt
@@ -119,7 +126,9 @@ cmdline::do_long_opt(const char *opt, const char *arg)
                 }
                 op->parse(string(arg));
                 return 1;
-            } else {
+            } 
+            else 
+            {
                 // Opción sin argumento.
                 //
                 op->parse(string(""));
@@ -155,8 +164,10 @@ cmdline::do_short_opt(const char *opt, const char *arg)
     // línea de comandos. De no encontrarse, indicamos el
     // error.
     //
-    for (op = option_table; op->short_name != 0; ++op) {
-        if (string(opt) == string(op->short_name)) {
+    for (op = option_table; op->short_name != 0; ++op) 
+    {
+        if (string(opt) == string(op->short_name)) 
+        {
             // Marcamos esta opción como usada en
             // forma explícita, para evitar tener
             // que inicializarla con el valor por
@@ -164,12 +175,14 @@ cmdline::do_short_opt(const char *opt, const char *arg)
             //
             op->flags |= OPT_SEEN;
             
-            if (op->has_arg) {
+            if (op->has_arg) 
+            {
                 // Como se trata de una opción
                 // con argumento, verificamos que
                 // el mismo haya sido provisto.
                 //
-                if (arg == 0) {
+                if (arg == 0) 
+                {
                     cerr << "Option requires argument: "
                     << "-"
                     << opt
@@ -178,7 +191,9 @@ cmdline::do_short_opt(const char *opt, const char *arg)
                 }
                 op->parse(string(arg));
                 return 1;
-            } else {
+            } 
+            else 
+            {
                 // Opción sin argumento.
                 //
                 op->parse(string(""));

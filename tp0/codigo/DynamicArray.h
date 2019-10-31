@@ -16,8 +16,8 @@ template< typename T > ostream &operator<<(ostream &, const DynamicArray< T > &)
 // Definición clase Arreglo Dinámico Genérico
 
 template< class T >
-class DynamicArray{
-	
+class DynamicArray
+{	
 	private:
 		size_t allocMemorySize_;
 		size_t length_;
@@ -80,4 +80,3 @@ class DynamicArray{
 #include "DynamicArray.cpp"
 
 #endif
-

@@ -6,15 +6,14 @@
 #include <cstdlib>
 
 #include "cmdline.h"
-#include "ComplexSignal.hpp"
-#include "complex.hpp"
-#include "DynamicArray.hpp"
-
-
+#include "ComplexSignal.h"
+#include "complex.h"
+#include "DynamicArray.h"
 
 #define tipo_dato_ double 
 
-enum method_t{
+enum method_t
+{
 		DFT_METHOD = 0,
 		IDFT_METHOD = 1
 };
@@ -32,7 +31,7 @@ static option_t options[] = {
     {1, "o", "output", "-", opt_output, OPT_DEFAULT},
     {1, "m", "method", "-", opt_method, OPT_DEFAULT},
     {0, "h", "help",  NULL, opt_help,   OPT_DEFAULT},
-    {0, },
+    {0, }
 };
 
 static method_t metodo = DFT_METHOD ;
@@ -41,37 +40,20 @@ static ostream *oss = 0;
 static fstream ifs;
 static fstream ofs;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int
 main(int argc, char * const argv[])
 {
     ComplexSignal csignal;
-    ComplexSignal *tcsignal;
+    ComplexSignal * tcsignal;
     cmdline cmdl(options);
     cmdl.parse(argc, argv);
     
-    while(1){
-		
-		if( !(*iss >> csignal) ){			
-			if( !( iss->eof() ) ){
+    while(true)
+    {		
+		if( !(*iss >> csignal) )
+		{			
+			if( !( iss->eof() ) )
+			{
 				cerr << "Corrupt input" << endl;
 				return EXIT_FAILURE;
 			}
@@ -80,17 +62,16 @@ main(int argc, char * const argv[])
 		
 		if(metodo == DFT_METHOD)
 			tcsignal = csignal.computeDFT();
-		else if(metodo == IDFT_METHOD)	
-			tcsignal = csignal.computeIDFT();	
+		else 
+			if(metodo == IDFT_METHOD)	
+				tcsignal = csignal.computeIDFT();	
+		
 		*oss << *tcsignal;
 		delete tcsignal;
 	}
 	
-	    
-    return EXIT_SUCCESS;
+   return EXIT_SUCCESS;
 }
-
-
 
 static void
 opt_method(string const &arg)
@@ -116,18 +97,23 @@ opt_method(string const &arg)
         }
     }
 }
+
 static void
 opt_input(string const &arg)
 {
 
-    if (arg == "-") {
+    if (arg == "-") 
+    {
         iss = &cin;
-    } else {
+    } 
+    else 
+    {
         ifs.open(arg.c_str(), ios::in);
         iss = &ifs;
     }
     
-    if (!iss->good()) {
+    if (!iss->good()) 
+    {
         cerr << "cannot open "
         << arg
         << "."
@@ -139,16 +125,18 @@ opt_input(string const &arg)
 static void
 opt_output(string const &arg)
 {
-
-    if (arg == "-") {
+    if (arg == "-") 
+    {
         oss = &cout;
-    } else {
+    } 
+    else 
+    {
         ofs.open(arg.c_str(), ios::out);
         oss = &ofs;
-    }
-    
+    }    
 
-    if (!oss->good()) {
+    if (!oss->good()) 
+    {
         cerr << "cannot open "
         << arg
         << "."
@@ -164,5 +152,3 @@ opt_help(string const &arg)
     << endl;
     exit(0);
 }
-
-

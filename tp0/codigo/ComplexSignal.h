@@ -6,12 +6,10 @@
 #include <string>
 #include <stdlib.h>
 #include <iomanip>
-#include "DynamicArray.hpp"
-#include "complex.hpp"
-
+#include "DynamicArray.h"
+#include "complex.h"
 
 using namespace std;
-
 
 class ComplexSignal
 {
@@ -31,6 +29,4 @@ class ComplexSignal
 		ComplexSignal* computeDFT();
 		ComplexSignal* computeIDFT();
 };
-
-
 #endif

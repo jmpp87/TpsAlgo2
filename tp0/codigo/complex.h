@@ -7,7 +7,8 @@
 
 using namespace std;
 
-class Complex{
+class Complex
+{
  private:
     double re_;
     double im_;
@@ -64,5 +65,4 @@ class Complex{
 	friend ostream &operator<<(ostream &, const Complex &);
 	friend istream &operator>>(istream &, Complex &);
 };
-
 #endif // COMPLEX_INCLUDED_H

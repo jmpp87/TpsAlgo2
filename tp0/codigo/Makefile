@@ -9,19 +9,19 @@ all: tp0
 tp0: $(OBJS)	
 	$(CC) $(LDFLAGS) -o tp0 $(OBJS)
 
-main.o: main.cpp cmdline.h ComplexSignal.hpp DynamicArray.hpp complex.hpp
+main.o: main.cpp cmdline.h ComplexSignal.h DynamicArray.h complex.h
 	$(CC) $(CXXFLAGS) -c main.cpp
 
 cmdline.o: cmdline.cpp cmdline.h
 	$(CC) $(CXXFLAGS) -c cmdline.cpp
 	
-ComplexSignal.o: ComplexSignal.cpp ComplexSignal.hpp complex.hpp DynamicArray.hpp
+ComplexSignal.o: ComplexSignal.cpp ComplexSignal.h complex.h DynamicArray.h
 	$(CC) $(CXXFLAGS) -c ComplexSignal.cpp
 
-DynamicArray.o: DynamicArray.cpp DynamicArray.hpp
+DynamicArray.o: DynamicArray.cpp DynamicArray.h
 	$(CC) $(CXXFLAGS) -c DynamicArray.cpp
 
-complex.o: complex.cpp complex.hpp
+complex.o: complex.cpp complex.h
 	$(CC) $(CXXFLAGS) -c complex.cpp
 	
 	
